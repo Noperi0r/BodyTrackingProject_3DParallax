@@ -2,6 +2,7 @@
 BodyTrackingProject using Azure Kinect and Unity, implmenting 3D Parallax.
 
 Azure Kinect SDK: 1.4.1
+
 Azure Kinect Body Tracking: 1.1.0
 
 **Copy directml.dll file in Unity project and paste it into the folder where unity editor is installed.**
