@@ -1,6 +1,8 @@
 # BodyTrackingProject_3DParallax
 BodyTrackingProject using Azure Kinect and Unity, implmenting 3D Parallax.
 
+Unity Editor: 2022.3.8f1
+
 Azure Kinect SDK: 1.4.1
 
 Azure Kinect Body Tracking: 1.1.0
