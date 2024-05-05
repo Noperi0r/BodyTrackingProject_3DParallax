@@ -2,24 +2,26 @@ using System;
 using System.Runtime.InteropServices;
 using UnityEngine;
 
-public class ScreenSizeGetter : MonoBehaviour
+public static class ScreenSizeGetter
 {
     // import dll
 #if UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN
-    const string PLUGIN_DLL = "GetDeviceCapsPlugin.dll";
-#endif
+    //const string PLUGIN_DLL = "GetDeviceCapsPlugin.dll";
 
     // import dll functions
-    [DllImport(PLUGIN_DLL)]
-    private static extern int GetScreenHeight();
-    [DllImport(PLUGIN_DLL)]
-    private static extern int GetScreenWidth();
+    [DllImport("GetDeviceCapsPlugin.dll")]
+    public static extern int GetScreenHeight();
+    [DllImport("GetDeviceCapsPlugin.dll")]
+    public static extern int GetScreenWidth();
 
-    void Start()
-    {
-        int width = GetScreenWidth();
-        Debug.Log("Screen Width: " + width);
-        int height = GetScreenHeight();
-        Debug.Log("Screen Height: " + height);
-    }
+#endif
+
+
+    /*    void Start()
+        {
+            int width = GetScreenWidth();
+            Debug.Log("Screen Width: " + width);
+            int height = GetScreenHeight();
+            Debug.Log("Screen Height: " + height);
+        }*/
 }

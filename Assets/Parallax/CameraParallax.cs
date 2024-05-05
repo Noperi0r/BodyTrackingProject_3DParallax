@@ -9,28 +9,33 @@ public class CameraParallax : MonoBehaviour
     Transform eyeTrackedTransform; // Sensor-tracked eye transform
     Transform rEyeTransformSC; 
 
-    DisplayInfo mainDisplayInfo;
+    //DisplayInfo mainDisplayInfo;
     float rScreenWidth, rScreenHeight; // Real screen size in meter
+
     const float const_InchToMeter = 0.0254f;
-    
+    const float const_mmToMeter = 0.001f;
+
     void Start()
     {
-        mainDisplayInfo = Screen.mainWindowDisplayInfo;
-
+        //mainDisplayInfo = Screen.mainWindowDisplayInfo;
+     
+        // Debug
         GetScreenSize_InMeter();
     }
 
     void Update()
     {
-        
     }
 
     void GetScreenSize_InMeter()
     {
-        rScreenWidth = (mainDisplayInfo.width / Screen.dpi) * const_InchToMeter; 
-        rScreenHeight = (mainDisplayInfo.height / Screen.dpi) * const_InchToMeter;
-        Debug.Log(rScreenWidth + " / " + rScreenHeight); // TODO: Slightly bigger than the actual value
-        // 0.6773334 / 0.381
+        //rScreenWidth = (mainDisplayInfo.width / Screen.dpi) * const_InchToMeter; 
+        //rScreenHeight = (mainDisplayInfo.height / Screen.dpi) * const_InchToMeter;
+
+        rScreenWidth = ScreenSizeGetter.GetScreenWidth() * const_mmToMeter;
+        rScreenHeight = ScreenSizeGetter.GetScreenHeight() * const_mmToMeter;
+
+        Debug.Log(rScreenWidth + " / " + rScreenHeight); 
     }
 
     void GetRealEyePos_InScreenCoord()
