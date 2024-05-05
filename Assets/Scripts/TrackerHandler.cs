@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using Microsoft.Azure.Kinect.BodyTracking;
+using UnityEditor.Hardware;
 
 public class TrackerHandler : MonoBehaviour
 {
@@ -125,7 +126,8 @@ public class TrackerHandler : MonoBehaviour
         return retIndex;
     }
 
-    private int findClosestTrackedBody(BackgroundData trackerFrameData)
+    // Implementation: private to public
+    public int findClosestTrackedBody(BackgroundData trackerFrameData)
     {
         int closestBody = -1;
         const float MAX_DISTANCE = 5000.0f;
@@ -204,5 +206,4 @@ public class TrackerHandler : MonoBehaviour
 
         return relativeRotation;
     }
-
 }
