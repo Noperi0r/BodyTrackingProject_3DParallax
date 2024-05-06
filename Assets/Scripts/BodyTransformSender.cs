@@ -113,8 +113,9 @@ public class BodyTransformSender : MonoBehaviour
     public Vector3 InputPositionEye(BackgroundData trackerFrameData)
     {
         // 눈 사이의 평균값 반환 구현 중
-        var headPosition = trackerFrameData.Bodies[findClosestTrackedBody(trackerFrameData)].JointPositions3D[(int)JointId.Head];
-        Vector3 headPos = new Vector3((float)headPosition.X, (float)headPosition.Y, (float)headPosition.Z);
+        var LeftEyePosition = trackerFrameData.Bodies[findClosestTrackedBody(trackerFrameData)].JointPositions3D[(int)JointId.EyeLeft];
+        var RightEyePosition = trackerFrameData.Bodies[findClosestTrackedBody(trackerFrameData)].JointPositions3D[(int)JointId.EyeRight];
+        Vector3 headPos = new Vector3(((float)LeftEyePosition.X+(float)RightEyePosition.X)/2, ((float)LeftEyePosition.Y + (float)RightEyePosition.Y) / 2, ((float)LeftEyePosition.Z + (float)RightEyePosition.Z) / 2);
 
         return headPos;
     }

@@ -24,7 +24,8 @@ public class main : MonoBehaviour
             {
                 if (m_lastFrameData.NumOfBodies != 0)
                 {
-                    Debug.Log(m_tracker.GetComponent<BodyTransformSender>().InputPosition(m_lastFrameData)); //머리 위치값 받아오기
+                    //Debug.Log(m_tracker.GetComponent<BodyTransformSender>().InputPosition(m_lastFrameData)); //머리 위치값 받아오기
+                    Debug.Log(m_tracker.GetComponent<BodyTransformSender>().InputPositionEye(m_lastFrameData));
                     m_tracker.GetComponent<TrackerHandler>().updateTracker(m_lastFrameData);
                 }
             }
