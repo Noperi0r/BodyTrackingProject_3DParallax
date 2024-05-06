@@ -16,17 +16,22 @@ public class main : MonoBehaviour
 
     void Update()
     {
+
+        
         if (m_skeletalTrackingProvider.IsRunning)
         {
             if (m_skeletalTrackingProvider.GetCurrentFrameData(ref m_lastFrameData))
             {
                 if (m_lastFrameData.NumOfBodies != 0)
                 {
+                    Debug.Log(m_tracker.GetComponent<BodyTransformSender>().InputPosition(m_lastFrameData)); //머리 위치값 받아오기
                     m_tracker.GetComponent<TrackerHandler>().updateTracker(m_lastFrameData);
                 }
             }
         }
     }
+
+
 
     void OnApplicationQuit()
     {
