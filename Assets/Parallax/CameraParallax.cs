@@ -71,6 +71,7 @@ public class CameraParallax : MonoBehaviour
 
     void LateUpdate()
     {
+        firstCam.enabled = false;
         firstCam.transform.position = transform.position;
         virtualWindow.transform.position = firstCam.transform.position + firstCam.transform.forward * windowDistance;
 
