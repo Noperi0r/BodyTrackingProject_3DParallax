@@ -4,10 +4,11 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UIElements;
 
-[ExecuteInEditMode]
+//[ExecuteInEditMode]
 public class CameraParallax : MonoBehaviour
 {
     [SerializeField] main kinectMain;
+    [SerializeField] InputFilter inputFilter;
 
     Transform eyeTrackedTransform; // Sensor-tracked eye transform
     public Transform rEyeTransformSC; //test
@@ -32,6 +33,7 @@ public class CameraParallax : MonoBehaviour
     void Update()
     {
         eyeTrackedTransform.position = kinectMain.m_tracker.GetComponent<BodyTransformSender>().InputPositionEye(kinectMain.m_lastFrameData);
+        eyeTrackedTransform.position = inputFilter.GetVector(eyeTrackedTransform.position);
         GetRealEyePos_InScreenCoord();
     }
 

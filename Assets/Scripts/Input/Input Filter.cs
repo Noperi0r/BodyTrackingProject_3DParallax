@@ -26,14 +26,17 @@ public class InputFilter : MonoBehaviour
                 break;
         }
     }
-    private void Update()
+
+/*    private void Update()
     {
         //임시 Vector, 이후 SerializeField로 Handler 연결해서 값 입력받아주면 됨.
-        Vector3 vector3 = transform.position;
+        Vector3 vector3 = inputVector;
         filter.FilterIn(vector3);
     }
-    public Vector3 GetVector()
+*/
+    public Vector3 GetVector(Vector3 input)
     {
+        filter.FilterIn(input);
         return filter.FilterOut();
     }
 
