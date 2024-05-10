@@ -7,6 +7,8 @@ using UnityEngine.UIElements;
 [ExecuteInEditMode]
 public class CameraParallax : MonoBehaviour
 {
+    [SerializeField] main kinectMain;
+
     Transform eyeTrackedTransform; // Sensor-tracked eye transform
     public Transform rEyeTransformSC; //test
 
@@ -22,11 +24,15 @@ public class CameraParallax : MonoBehaviour
      
         // Debug
         GetScreenSize_InMeter();
+
+        eyeTrackedTransform = GetComponent<Transform>();
     }
     
     // Get Monitor Information Method
     void Update()
     {
+        eyeTrackedTransform.position = kinectMain.m_tracker.GetComponent<BodyTransformSender>().InputPositionEye(kinectMain.m_lastFrameData);
+        GetRealEyePos_InScreenCoord();
     }
 
     void GetScreenSize_InMeter()
