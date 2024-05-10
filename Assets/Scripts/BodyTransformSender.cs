@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using Microsoft.Azure.Kinect.BodyTracking;
 using System.Collections;
 using System.Collections.Generic;
@@ -113,8 +114,11 @@ public class BodyTransformSender : MonoBehaviour
     public Vector3 InputPositionEye(BackgroundData trackerFrameData)
     {
         // 눈 사이의 평균값 반환 구현 중
-        var LeftEyePosition = trackerFrameData.Bodies[findClosestTrackedBody(trackerFrameData)].JointPositions3D[(int)JointId.EyeLeft];
-        var RightEyePosition = trackerFrameData.Bodies[findClosestTrackedBody(trackerFrameData)].JointPositions3D[(int)JointId.EyeRight];
+        int closestIdx = findClosestTrackedBody(trackerFrameData);
+        if (closestIdx == -1) return Vector3.zero;
+
+        var LeftEyePosition = trackerFrameData.Bodies[closestIdx].JointPositions3D[(int)JointId.EyeLeft];
+        var RightEyePosition = trackerFrameData.Bodies[closestIdx].JointPositions3D[(int)JointId.EyeRight];
         Vector3 headPos = new Vector3(((float)LeftEyePosition.X+(float)RightEyePosition.X)/2, ((float)LeftEyePosition.Y + (float)RightEyePosition.Y) / 2, ((float)LeftEyePosition.Z + (float)RightEyePosition.Z) / 2);
 
         return headPos;
