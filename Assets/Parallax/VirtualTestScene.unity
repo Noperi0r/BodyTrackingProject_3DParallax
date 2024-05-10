@@ -148,7 +148,7 @@ Transform:
   m_GameObject: {fileID: 450523367}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.19, y: 0, z: -0.43}
+  m_LocalPosition: {x: 0.28140706, y: 0.28140706, z: 0.28140706}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -353,6 +353,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 210279052, guid: 019b917704c3c29478d778e143d411d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1246067623}
+    - targetCorrespondingSourceObject: {fileID: 210279052, guid: 019b917704c3c29478d778e143d411d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1246067626}
   m_SourcePrefab: {fileID: 100100000, guid: 019b917704c3c29478d778e143d411d2, type: 3}
 --- !u!1 &1246067622 stripped
 GameObject:
@@ -405,6 +408,19 @@ MonoBehaviour:
   - {x: 0, y: 0, z: 0, w: 0}
   - {x: 0, y: 0, z: 0, w: 0}
   drawSkeletons: 1
+--- !u!114 &1246067626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1246067622}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a990481a36289054fa8d920b2a4d56fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Type: 1
 --- !u!1 &1285122541
 GameObject:
   m_ObjectHideFlags: 0
@@ -510,6 +526,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kinectMain: {fileID: 1285122543}
+  inputFilter: {fileID: 1246067626}
   rEyeTransformSC: {fileID: 450523368}
   firstCam: {fileID: 2030596191}
   secondCam: {fileID: 1416840681}
@@ -698,7 +715,7 @@ Transform:
   m_GameObject: {fileID: 1416840678}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.19, y: 0, z: 0.66941947}
+  m_LocalPosition: {x: 0.28140706, y: 0.28140706, z: 1.5390224}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
