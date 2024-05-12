@@ -6,7 +6,6 @@ using UnityEngine;
 public class AverageFilter : Filter
 {
     int windowSize;
-    int currWindowSize;
     Vector3[] vector3s;
     int currWindowIndex;
     Vector3 currVec;
@@ -16,7 +15,6 @@ public class AverageFilter : Filter
         windowSize = 4;
         vector3s = new Vector3[windowSize];
         currWindowIndex = 0;
-        currWindowSize = 0;
         currVec = new(0,0,0);
         for(int i = 0; i < windowSize; i++)
         {
@@ -28,7 +26,6 @@ public class AverageFilter : Filter
         windowSize = size;
         vector3s = new Vector3[windowSize];
         currWindowIndex = 0;
-        currWindowSize = 0;
         currVec = new(0, 0, 0);
         for (int i = 0; i < windowSize; i++)
         {
