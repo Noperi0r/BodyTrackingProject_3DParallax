@@ -28,7 +28,7 @@ public class CameraParallax : MonoBehaviour
 
         eyeTrackedTransform = GetComponent<Transform>();
     }
-    
+
     // Get Monitor Information Method
     void Update()
     {
@@ -96,7 +96,7 @@ public class CameraParallax : MonoBehaviour
         Tvector = rEyeTransformSC.position - vEyeTransformSC;
         secondCam.transform.position = firstCam.transform.position + Tvector;
 
-        secondCam.transform.position = new Vector3(-secondCam.transform.position.x, -secondCam.transform.position.y, secondCam.transform.position.z);
+        secondCam.transform.position = new Vector3(secondCam.transform.position.x, -secondCam.transform.position.y, secondCam.transform.position.z);
 
         Vector3 secondLocalPos = virtualWindow.transform.InverseTransformPoint(secondCam.transform.position);
 

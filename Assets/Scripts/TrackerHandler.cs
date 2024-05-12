@@ -109,7 +109,7 @@ public class TrackerHandler : MonoBehaviour
 
         // render the closest body
         Body skeleton = trackerFrameData.Bodies[closestBody];
-        renderSkeleton(skeleton, 0);
+        //renderSkeleton(skeleton, 0);
     }
 
     int findIndexFromId(BackgroundData frameData, int id)
