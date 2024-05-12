@@ -80,7 +80,8 @@ public class CameraParallax : MonoBehaviour
     void LateUpdate()
     {
         firstCam.enabled = false;
-        firstCam.transform.position = transform.position;
+        //firstCam.transform.position = transform.position;
+        firstCam.transform.position = Vector3.zero;
         virtualWindow.transform.position = firstCam.transform.position + firstCam.transform.forward * windowDistance;
 
         windowWidth = (float)Screen.width / Screen.height * windowSize;
@@ -94,6 +95,8 @@ public class CameraParallax : MonoBehaviour
 
         Tvector = rEyeTransformSC.position - vEyeTransformSC;
         secondCam.transform.position = firstCam.transform.position + Tvector;
+
+        secondCam.transform.position = new Vector3(-secondCam.transform.position.x, -secondCam.transform.position.y, secondCam.transform.position.z);
 
         Vector3 secondLocalPos = virtualWindow.transform.InverseTransformPoint(secondCam.transform.position);
 
