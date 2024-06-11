@@ -11643,7 +11643,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 225614256575617774, guid: e6c60824b1375fc4cafe17e82c574d77, type: 3}
       propertyPath: m_Name
-      value: KinectCamera
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 2369081150357204973, guid: e6c60824b1375fc4cafe17e82c574d77, type: 3}
       propertyPath: m_LocalPosition.x
