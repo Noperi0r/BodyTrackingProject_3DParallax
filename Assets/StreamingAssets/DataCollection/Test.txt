@@ -1,0 +1,4 @@
+3D PARALLAX TEST DATA
+Tag: 2D / Direction Vector: (0.00, 1.00, 0.00) / True Position: (1.00, 2.00, 3.00) / Estimated Position: (4.00, 5.00, 6.00)
+Tag: 3D / Direction Vector: (1.00, 0.00, 0.00) / True Position: (0.00, 0.00, 0.00) / Estimated Position: (-1.00, -1.00, -1.00)
+Tag: 3D / Direction Vector: (0.00, 0.00, 1.00) / True Position: (100.00, 200.00, 300.00) / Estimated Position: (400.00, 50.00, 600.00)
