@@ -39,8 +39,8 @@ public class RandomNormalVector : MonoBehaviour
             // 선의 색상 및 두께 설정 (옵션)
             lineRenderer.startColor = Color.red;
             lineRenderer.endColor = Color.red;
-            lineRenderer.startWidth = 0.1f;
-            lineRenderer.endWidth = 0.1f;
+            lineRenderer.startWidth = 0.3f;
+            lineRenderer.endWidth = 0.3f;
 
             RaycastHit[] hits = Physics.RaycastAll(Vector3.zero, randomDirection.normalized);
 
