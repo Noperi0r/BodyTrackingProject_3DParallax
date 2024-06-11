@@ -28,15 +28,16 @@ public struct TestDataValue
 public class DataFileHandler : MonoBehaviour
 {
     string filePath = Application.streamingAssetsPath + "/DataCollection/"; // Assets/StreamingAssets/DataCollection
-    string fileName = "TestData.txt";
+    string baseFileName = "TestData";
+    string fileExtension = ".txt";
     string dataFile;
     List<TestDataValue> testDataResults = new List<TestDataValue>();
 
     void Start()
     {
-        dataFile = filePath + fileName;
-
         Directory.CreateDirectory(filePath);
+        dataFile = GetUniqueFilePath();
+
 
         // DEBUG 
 /*        List<TestDataValue> testDataResults = new List<TestDataValue>(); 
@@ -51,6 +52,21 @@ public class DataFileHandler : MonoBehaviour
 
         WriteDataToFile(testDataResults);*/
 
+    }
+    string GetUniqueFilePath()
+    {
+        int fileIndex = 1;
+        string fileName = baseFileName + fileExtension;
+        string filePathWithIndex = Path.Combine(filePath, fileName);
+
+        while (File.Exists(filePathWithIndex))
+        {
+            fileName = baseFileName + fileIndex + fileExtension;
+            filePathWithIndex = Path.Combine(filePath, fileName);
+            fileIndex++;
+        }
+
+        return filePathWithIndex;
     }
 
     public void WriteDataToFile()
