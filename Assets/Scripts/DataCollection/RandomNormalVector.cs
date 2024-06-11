@@ -6,7 +6,12 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(LineRenderer))]
 public class RandomNormalVector : MonoBehaviour
 {
+    public enum Dim { d3, d2 };
+    public Dim dim;
     public GameObject markerPrefab;
+    public DataFileHandler dataFileHandler;
+    public string is3d;
+
     private GameObject markerInstance;
 
     private LineRenderer lineRenderer;
@@ -86,7 +91,8 @@ public class RandomNormalVector : MonoBehaviour
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
             Debug.Log($"Answer : {answerPlane} : {answerPosition}\nUser : {userClickPlane} : {userClickPosition}");
-
+            TestDataValue t = new TestDataValue((int)dim,randomDirection,answerPosition,userClickPosition);
+            dataFileHandler.dataWrite(t);
             // 货肺款 罚待 氦磐 积己
             GenerateRandomVector();
         }

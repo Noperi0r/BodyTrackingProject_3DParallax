@@ -7,14 +7,18 @@ using System;
 
 public struct TestDataValue
 {
+    public enum Dim { d3, d2 };
     public string tag { get; set; }
     public Vector3 direction { get; set; }
     public Vector3 truePos { get; set; }
     public Vector3 predictedPos { get; set; }
 
-    public TestDataValue(string _tag, Vector3 _direction, Vector3 _truePos, Vector3 _predictedPos): this()
+    public TestDataValue(int dim, Vector3 _direction, Vector3 _truePos, Vector3 _predictedPos): this()
     {
-        tag = _tag;
+        if (dim == 0)
+            tag = "3D";
+        else if (dim == 1)
+            tag = "2D";
         direction = _direction;
         truePos = _truePos; 
         predictedPos = _predictedPos;
@@ -26,6 +30,7 @@ public class DataFileHandler : MonoBehaviour
     string filePath = Application.streamingAssetsPath + "/DataCollection/"; // Assets/StreamingAssets/DataCollection
     string fileName = "TestData.txt";
     string dataFile;
+    List<TestDataValue> testDataResults = new List<TestDataValue>();
 
     void Start()
     {
@@ -48,7 +53,7 @@ public class DataFileHandler : MonoBehaviour
 
     }
 
-    public void WriteDataToFile(List<TestDataValue> testDataResults)
+    public void WriteDataToFile()
     {
         if(!File.Exists(dataFile))
         {
@@ -66,4 +71,12 @@ public class DataFileHandler : MonoBehaviour
         print("WriteDataToFile: OK");
     }
 
+    public void dataWrite(TestDataValue t)
+    {
+        testDataResults.Add(t);
+    }
+    private void OnDestroy()
+    {
+        WriteDataToFile();
+    }
 }
