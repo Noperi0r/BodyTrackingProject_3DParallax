@@ -12,7 +12,11 @@ public class RandomNormalVector : MonoBehaviour
     private LineRenderer lineRenderer;
     private Vector3 randomDirection;
 
-    Vector2 userClickPosition = Vector2.zero;
+    private Vector2 answerPosition = Vector2.zero;
+    private string answerPlane;
+
+    private Vector2 userClickPosition = Vector2.zero;
+    private string userClickPlane;
     void Start()
     {
         markerInstance = Instantiate(markerPrefab);
@@ -46,9 +50,8 @@ public class RandomNormalVector : MonoBehaviour
                 {
                     // 충돌 지점을 로컬 2D 좌표로 변환
                     Vector3 localPoint = hit.collider.transform.InverseTransformPoint(hit.point);
-                    Vector2 local2DPoint = new Vector2(localPoint.x, localPoint.z); // Plane의 2D 좌표 (x, z)
-
-                    Debug.Log($"{hit.collider.name}과 충돌한 지점: {local2DPoint}");
+                    answerPosition = new Vector2(localPoint.x, localPoint.z); // Plane의 2D 좌표 (x, z)
+                    answerPlane = hit.collider.name;
 
                     return;
                 }
@@ -73,6 +76,7 @@ public class RandomNormalVector : MonoBehaviour
                 // 유저가 클릭한 지점을 로컬 2D 좌표로 변환
                 Vector3 localPoint = hit.collider.transform.InverseTransformPoint(hit.point);
                 userClickPosition = new Vector2(localPoint.x, localPoint.z); // Plane의 2D 좌표 (x, z)
+                userClickPlane = hit.collider.name;
             }
         }
     }
@@ -81,7 +85,7 @@ public class RandomNormalVector : MonoBehaviour
     {
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
-            Debug.Log($"유저 클릭 위치: {userClickPosition}");
+            Debug.Log($"Answer : {answerPlane} : {answerPosition}\nUser : {userClickPlane} : {userClickPosition}");
 
             // 새로운 랜덤 벡터 생성
             GenerateRandomVector();
