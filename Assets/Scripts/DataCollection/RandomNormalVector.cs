@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,6 +11,7 @@ public class RandomNormalVector : MonoBehaviour
     public enum Dim { d3, d2 };
     public Dim dim;
     public GameObject markerPrefab;
+    public GameObject Origin;
     public DataFileHandler dataFileHandler;
     public string is3d;
 
@@ -17,19 +20,18 @@ public class RandomNormalVector : MonoBehaviour
     private LineRenderer lineRenderer;
     private Vector3 randomDirection;
 
-    private Vector2 answerPosition = Vector2.zero;
-    private string answerPlane;
+    private Vector3 inputVector;
+    private bool isStarted = false;
+    private float deltaTime;
+    private Stopwatch watch = new Stopwatch();
 
-    private Vector2 userClickPosition = Vector2.zero;
-    private string userClickPlane;
     void Start()
     {
         markerInstance = Instantiate(markerPrefab);
         lineRenderer = GetComponent<LineRenderer>();
-        GenerateRandomVector();
     }
 
-    void GenerateRandomVector()
+    public void GenerateRandomVector()
     {
         while (true)
         {
@@ -53,11 +55,7 @@ public class RandomNormalVector : MonoBehaviour
             {
                 if (hit.collider.gameObject.CompareTag("Plane")) // 오브젝트가 Plane 태그를 가지고 있는지 확인
                 {
-                    // 충돌 지점을 로컬 2D 좌표로 변환
-                    Vector3 localPoint = hit.collider.transform.InverseTransformPoint(hit.point);
-                    answerPosition = new Vector2(localPoint.x, localPoint.z); // Plane의 2D 좌표 (x, z)
-                    answerPlane = hit.collider.name;
-
+                    watch.Start();
                     return;
                 }
             }
@@ -76,12 +74,8 @@ public class RandomNormalVector : MonoBehaviour
             // 충돌한 오브젝트가 Plane 태그를 가지고 있는지 확인
             if (hit.collider.gameObject.CompareTag("Plane"))
             {
+                //평면상에 마커 배치
                 markerInstance.transform.position = hit.point;
-
-                // 유저가 클릭한 지점을 로컬 2D 좌표로 변환
-                Vector3 localPoint = hit.collider.transform.InverseTransformPoint(hit.point);
-                userClickPosition = new Vector2(localPoint.x, localPoint.z); // Plane의 2D 좌표 (x, z)
-                userClickPlane = hit.collider.name;
             }
         }
     }
@@ -90,8 +84,26 @@ public class RandomNormalVector : MonoBehaviour
     {
         if (Mouse.current.leftButton.wasPressedThisFrame)
         {
-            Debug.Log($"Answer : {answerPlane} : {answerPosition}\nUser : {userClickPlane} : {userClickPosition}");
-            TestDataValue t = new TestDataValue((int)dim,randomDirection,answerPosition,userClickPosition);
+            if (!isStarted)
+            {
+                isStarted = true;
+                return;
+            }
+            //Debug.Log($"Answer : {answerPlane} : {answerPosition}\nUser : {userClickPlane} : {userClickPosition}");
+            watch.Stop();
+            deltaTime = watch.ElapsedMilliseconds;
+            inputVector = markerInstance.transform.position-Origin.transform.position;
+            inputVector.Normalize();
+            float realLongitude = Mathf.Atan2(randomDirection.y, randomDirection.x);
+            float realLatitude = Mathf.Asin(randomDirection.z);
+
+            float inputLongitude = Mathf.Atan2(inputVector.y, inputVector.x);
+            float inputLatitude = Mathf.Asin(inputVector.z);
+
+            float longitude = realLongitude- inputLongitude;
+            float latitude = realLatitude - inputLatitude;
+            float angle = Vector3.Angle(randomDirection, inputVector); //구현필요
+            TestDataValue t = new TestDataValue((int)dim, randomDirection, inputVector, deltaTime, longitude, latitude, angle);
             dataFileHandler.dataWrite(t);
             // 새로운 랜덤 벡터 생성
             GenerateRandomVector();
