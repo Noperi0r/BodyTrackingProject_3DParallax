@@ -94,19 +94,36 @@ public class RandomNormalVector : MonoBehaviour
             deltaTime = watch.ElapsedMilliseconds;
             inputVector = markerInstance.transform.position-Origin.transform.position;
             inputVector.Normalize();
-            float realLongitude = Mathf.Atan2(randomDirection.y, randomDirection.x);
-            float realLatitude = Mathf.Asin(randomDirection.z);
+            randomDirection.Normalize();
+            float realLongitude = vectorToLongitudeDegree(randomDirection);
+            float realLatitude = vectorToLatitudeDegree(randomDirection);
 
-            float inputLongitude = Mathf.Atan2(inputVector.y, inputVector.x);
-            float inputLatitude = Mathf.Asin(inputVector.z);
+            float inputLongitude = vectorToLongitudeDegree(inputVector);
+            float inputLatitude = vectorToLatitudeDegree(inputVector);
 
-            float longitude = realLongitude- inputLongitude;
-            float latitude = realLatitude - inputLatitude;
+            float longitude = inputLongitude- realLongitude;
+            if (longitude > 180.0f)
+            {
+                longitude = 360 - longitude;
+            }
+            if(longitude < -180.0f)
+            {
+                longitude = 360 + longitude;
+            }
+            float latitude = inputLatitude -realLatitude;
             float angle = Vector3.Angle(randomDirection, inputVector); //구현필요
             TestDataValue t = new TestDataValue((int)dim, randomDirection, inputVector, deltaTime, longitude, latitude, angle);
             dataFileHandler.dataWrite(t);
             // 새로운 랜덤 벡터 생성
             GenerateRandomVector();
         }
+    }
+    private float vectorToLongitudeDegree(Vector3 vector)
+    {
+        return Mathf.Atan2(vector.z,vector.x) * Mathf.Rad2Deg + 180;
+    }
+    private float vectorToLatitudeDegree(Vector3 vector)
+    {
+        return Mathf.Atan2(Mathf.Sqrt(vector.x * vector.x + vector.z * vector.z), vector.y) * Mathf.Rad2Deg;
     }
 }
